@@ -1,0 +1,20 @@
+Package: featureReduction
+Title: Reduce Feature Count of Metabolomics Data Using Predefined Groups
+Version: 0.0.0.9000
+Authors@R: 
+    person("Johanna", "Fleischman", , "johf@umich.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-5491-4110"))
+Description: This package reduces the number of named features in a
+    metabolomics, lipidomics, or similar type dataset. User provides a list 
+    of named features in the dataset with a classification/group ID for each 
+    feature in the dataset. A representative value for each predefined metabolite
+    group is created by weighing metabolites using principle component analysis. 
+License: `use_mit_license()`
+Encoding: UTF-8
+Imports: 
+    dplyr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 2.10)
+LazyData: true
