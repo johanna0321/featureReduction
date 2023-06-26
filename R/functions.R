@@ -15,13 +15,15 @@
 #' @param feature_group_key Dataframe with column 1 as features and column 2 as group ID.
 #' Column names in `feature_data` must have exact matches in column 1 of `feature_group_key` to
 #' be included in the grouping analysis.
-#' @param norm One of `"none"` (default) or `"scale"` to indicate weather features should be scaled
+#' @param scale One of `TRUE` (default) or `FALSE` to indicate weather features should be scaled
 #' prior to weighing. This is helpful for heatmaps. Note that PCA will be performed on the
-#' provided `feature_data` values.
+#' provided `feature_data` values regardless of scaling parameter.
+#' @importFrom rlang .data
+#' @importFrom magrittr "%>%"
 #' @returns A matrix with columns as groups (provided group IDs) and rows as observations.
 #' @export
 reduce_features_by_pca <- function(feature_data = NULL, feature_group_key = NULL,
-                                   norm = "none"){
+                                   scale = TRUE){
 
   if(nrow(feature_data)<5){
     warning("This grouping function uses PCA weighing and is not recommended for datasets with less than 5 observations")
@@ -59,10 +61,10 @@ reduce_features_by_pca <- function(feature_data = NULL, feature_group_key = NULL
   # The following loops over each unique group to assign a single value for each observation
   for (g in unique(feature_group_key[,"Group"])) {
 
-    # Get the feature names that correspond to interative loop
-    filtered_group_features <- feature_group_key %>%
-      dplyr::filter(Group == g) %>%
-      dplyr::pull(Feature)
+    # Get the feature names that correspond to iterative loop
+    filtered_group_features <- feature_group_key %>% 
+      dplyr::filter(.data$Group == g) %>%
+      dplyr::pull(.data$Feature)
 
     # Select features from feature_data
     if(any(filtered_group_features %in% colnames(feature_data))){
@@ -79,21 +81,21 @@ reduce_features_by_pca <- function(feature_data = NULL, feature_group_key = NULL
     if(sum(is.na(filtered_feature_data))>0){
       message(paste0("For group ", g, ", ", sum(is.na(filtered_feature_data))," NA values; excluding from PCA analysis"))
     }
-    pca <- prcomp(na.exclude(filtered_feature_data), scale = T)
+    pca <- stats::prcomp(stats::na.exclude(filtered_feature_data), scale = T)
     pc1_rotation <- abs(pca$rotation[,1])
 
     # Individual feature values are multiplied by the absolute values of their PC1
     # rotation/loading factor so that the values are adjusted for their degree
     # of contribution to variation in the data, then summed
-    if(norm == "none") {
-      pc1_adjusted_values <- t(filtered_feature_data)*pc1_rotation
-
-    } else if(norm == "scale") {
+    if(scale == TRUE) {
       filtered_feature_data_scale <- apply(filtered_feature_data, 2, function(x) scale(x))
       pc1_adjusted_values <- t(filtered_feature_data_scale)*pc1_rotation
-
+    
+    } else if(scale == FALSE) {
+      pc1_adjusted_values <- t(filtered_feature_data)*pc1_rotation
+      
     } else {
-      error("Provide one of 'none' or 'scale' for norm option")
+      stop("Provide one of 'TRUE' or 'FALSE' for scale option")
     }
 
     feature_group_data <- as.data.frame(apply(pc1_adjusted_values, 2, function(x) sum(x)))

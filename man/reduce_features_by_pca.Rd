@@ -7,7 +7,7 @@
 reduce_features_by_pca(
   feature_data = NULL,
   feature_group_key = NULL,
-  norm = "none"
+  scale = TRUE
 )
 }
 \arguments{
@@ -21,9 +21,9 @@ the output object.}
 Column names in \code{feature_data} must have exact matches in column 1 of \code{feature_group_key} to
 be included in the grouping analysis.}
 
-\item{norm}{One of \code{"none"} (default) or \code{"scale"} to indicate weather features should be scaled
+\item{scale}{One of \code{TRUE} (default) or \code{FALSE} to indicate weather features should be scaled
 prior to weighing. This is helpful for heatmaps. Note that PCA will be performed on the
-provided \code{feature_data} values.}
+provided \code{feature_data} values regardless of scaling parameter.}
 }
 \value{
 A matrix with columns as groups (provided group IDs) and rows as observations.
