@@ -1,7 +1,7 @@
 # featureReduction
 
 *An R companion package for "Sex influences the homeostatic plasma lipidome more robustly than diet or intrinsic 
-cardiorespiratory fitness"
+cardiorespiratory fitness"*
   
 ## Overview
   
@@ -19,7 +19,7 @@ This package is not frequently updated. Please contact that author for help or t
 
 First, download and install R and RStudio:
   
-  - [R](https://mirror.las.iastate.edu/CRAN/) 
+- [R](https://mirror.las.iastate.edu/CRAN/) 
 - [RStudio](https://rstudio.com/products/rstudio/download/) (free version)
 
 Then, open RStudio and install the `devtools` package
@@ -51,5 +51,5 @@ rat_meta_data
   
 Functions: 
 ```
-reduced_features_by_pca()
+reduce_features_by_pca()
 ```
