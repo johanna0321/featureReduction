@@ -1,7 +1,8 @@
 ---
 title: "Sex influences the homeostatic plasma lipidome more robustly than diet or intrinsic cardiorespiratory fitness"
 author: "Johanna Fleischman"
-date: "`r Sys.Date()`"
+date: "2023-07-19"
+update date: "`r Sys.Date()`"
 output: 
   html_document:
     code_folding: hide
@@ -10,16 +11,12 @@ output:
 
 ```{r setup, include = FALSE}
 # Set up the session with necessary packages
-session_packages = c("tidyverse")
+library(tidyverse)
+library(devtools) 
 
-for (lib_name in session_packages){
-  tryCatch({library(lib_name,character.only = T)}, error = function(e) {
-    print(paste("Cannot load",lib_name,", please install"))
-  })
-}
-
-# TEMP UNTIL I CAN DO AN INSTALL PACKAGE
-devtools::load_all("/Users/johf/Documents/GitHub/featureReduction")
+# Install package from github 
+devtools::install_github("johanna0321/featureReduction")
+library(featureReduction)
 
 data("rat_lipidomics_day0")
 data("rat_lipidomics_day3")
