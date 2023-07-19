@@ -18,18 +18,12 @@ library(devtools)
 devtools::install_github("johanna0321/featureReduction")
 library(featureReduction)
 
+# Load data with package
 data("rat_lipidomics_day0")
 data("rat_lipidomics_day3")
 data("rat_lipidomics_day14")
 data("rat_lipidomics_group_key")
 data("rat_meta_data")
-
-ordered_clusters <- c("AcylCN","CE","CER.mono","CER.poly","CER.sat","FFA.mono.poly",
-                      "FFA.sat","GlcCER","PA","PE","PG","PI","Plas.PE","Plas.PC.sat",
-                      "Plas.PC.mono","Plas.PC.poly","SM.sat","SM.mono","SM.poly",
-                      "Lyso.sat","Lyso.mono","Lyso.poly","PC.sat","PC.mono","PC.poly",
-                      "DG.sat","DG.mono","DG.poly","TG.sat.even","TG.sat.odd",
-                      "TG.mono.even","TG.mono.odd","TG.poly.even","TG.poly.odd")
 
 knitr::opts_chunk$set(echo = TRUE, out.height='50%',out.width='50%')
 ```
@@ -66,6 +60,14 @@ all_rat_norm_clusters <- lapply(all_rat_lipids,
 For the heatmap, we will use the scaled version of the cluster data.
 
 ```{r, warning=FALSE}
+
+# Make heatmap cluster order
+ordered_clusters <- c("AcylCN","CE","CER.mono","CER.poly","CER.sat","FFA.mono.poly",
+                      "FFA.sat","GlcCER","PA","PE","PG","PI","Plas.PE","Plas.PC.sat",
+                      "Plas.PC.mono","Plas.PC.poly","SM.sat","SM.mono","SM.poly",
+                      "Lyso.sat","Lyso.mono","Lyso.poly","PC.sat","PC.mono","PC.poly",
+                      "DG.sat","DG.mono","DG.poly","TG.sat.even","TG.sat.odd",
+                      "TG.mono.even","TG.mono.odd","TG.poly.even","TG.poly.odd")
 
 # Clean data to make data heatmap plotable, using pre-defined ordered clusters
 scaled_clusts_for_heatmap <- all_rat_scaled_clusters %>% 

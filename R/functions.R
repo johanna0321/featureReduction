@@ -24,6 +24,10 @@
 #' @export
 reduce_features_by_pca <- function(feature_data = NULL, feature_group_key = NULL,
                                    scale = TRUE){
+  
+  if(is.null(feature_data) || is.null(feature_group_key)){
+    stop("Please provide both feature_data and feature_key")
+  }
 
   if(nrow(feature_data)<5){
     warning("This grouping function uses PCA weighing and is not recommended for datasets with less than 5 observations")
