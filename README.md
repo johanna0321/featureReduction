@@ -1,15 +1,8 @@
 # featureReduction
 
-*An R companion package for "Sex influences the homeostatic plasma lipidome more robustly than diet or intrinsic 
-cardiorespiratory fitness"*
-  
 ## Overview
   
-This package provides the raw lipidomics data and lipid clusters for the rat data contained in
-the paper "Sex influences the homeostatic plasma lipidome more robustly than diet or intrinsic 
-cardiorespiratory fitness" and provides a user-friendly function to replicate the feature cluster
-calculations. This function reduces the number of features in a list to their respective cluster
-using PCA-based weighing. 
+This package provides a user-friendly function to perform PCA-based a priori based feature-clustering. Example data and my example pipeline are provided.
 
 ## Package Updates
 
