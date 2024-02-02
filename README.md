@@ -2,7 +2,7 @@
 
 ## Overview
   
-This package provides a user-friendly function to perform PCA-based a priori based feature-clustering. Example data and my example pipeline are provided.
+This package provides a user-friendly function to perform PCA-based a priori based feature-clustering. Example data and my example pipeline are provided as used in [Sex modulates the diet-induced changes to the plasma lipidome in a rat model of cardiorespiratory fitness](https://doi.org/10.1016/j.bbalip.2024.159451).
 
 ## Package Updates
 
